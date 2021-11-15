@@ -1,0 +1,11 @@
+{
+    "python.pythonPath": "/Users/jeydi/Library/Caches/pypoetry/virtualenvs/nlp-for-querying-data-2XKhvqm_-py3.8/bin/python",
+    "python.linting.flake8Enabled": true,
+    "python.linting.mypyEnabled": false,
+    "python.linting.enabled": true,
+    "python.testing.pytestArgs": [
+        "test"
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true,
+}
