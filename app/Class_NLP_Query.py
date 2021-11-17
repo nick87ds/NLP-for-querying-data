@@ -36,7 +36,7 @@ from pprint import pprint
 
 import spacy
 
-nlp = spacy.load("it_core_news_lg")
+nlp = spacy.load("it_core_news_sm")
 
 
 # In[3]:
@@ -177,10 +177,11 @@ def conserva_solo_slot_name(text: str) -> str:
 
 
 class BotAI:
-    def __init__(self, db_file: str, model_path: str = "models"):
+    def __init__(self, db_file: str, model_path: str = "models", data_path: str= "data"):
 
         self.model_path = model_path
         self.db_file = db_file
+        self.data_path = data_path
 
         self.classifier_pickle = "classifier.pickle"
         self.label_encoder_pickle = "label_encoder.pickle"
@@ -290,7 +291,7 @@ class BotAI:
 
     def build_lookup_tables(self) -> bool:
 
-        df_entities = pd.read_excel("dataset.xlsx", sheet_name="entities_slots")
+        df_entities = pd.read_excel(os.path.join(self.data_path,"dataset.xlsx"), sheet_name="entities_slots")
 
         self.lookups = remove_nan(df_entities)
 
@@ -304,7 +305,7 @@ class BotAI:
 
         # UTENTE
 
-        df_user = pd.read_excel("dataset.xlsx", sheet_name="user", header=None)
+        df_user = pd.read_excel(os.path.join(self.data_path,"dataset.xlsx"), sheet_name="user", header=None)
         df_user.columns = ["user", "sentences"]
         df_user["user"] = df_user["user"].fillna(method="ffill", axis=0)
 
@@ -325,16 +326,16 @@ class BotAI:
             for values in v:
 
                 if i:
-                    with open(self.sentences_file, "w+") as f:
+                    with open(os.path.join(self.data_path,self.sentences_file), "w+") as f:
                         f.writelines(f"{values}|{k}\n")
                         i = False
                 else:
-                    with open(self.sentences_file, "a+") as f:
+                    with open(os.path.join(self.data_path,self.sentences_file), "a+") as f:
                         f.writelines(f"{values}|{k}\n")
 
         # BOT
 
-        df_bot = pd.read_excel("dataset.xlsx", sheet_name="bot", header=None)
+        df_bot = pd.read_excel(os.path.join(self.data_path,"dataset.xlsx"), sheet_name="bot", header=None)
         df_bot.columns = ["bot", "sentences"]
         df_bot["bot"] = df_bot["bot"].fillna(method="ffill", axis=0)
 
@@ -348,7 +349,7 @@ class BotAI:
 
         # DIALOGS
 
-        df_dialogs = pd.read_excel("dataset.xlsx", sheet_name="dialogs")
+        df_dialogs = pd.read_excel(os.path.join(self.data_path,"dataset.xlsx"), sheet_name="dialogs")
 
         self.dialogs = remove_nan(df_dialogs)
 
@@ -364,7 +365,7 @@ class BotAI:
 
         sentences, categories = [], []
 
-        with open(self.sentences_file, encoding="utf-8") as f:
+        with open(os.path.join(self.data_path,self.sentences_file), encoding="utf-8") as f:
             dataset = f.read()
             dataset = dataset.split("\n")
 
@@ -412,12 +413,12 @@ class BotAI:
 
             if i == 0:
 
-                with open(self.sentences_file_generated, "w+") as f:
+                with open(os.path.join(self.data_path,self.sentences_file_generated), "w+") as f:
                     f.writelines(f"{sentence}|{category}\n")
 
             else:
 
-                with open(self.sentences_file_generated, "a+") as f:
+                with open(os.path.join(self.data_path,self.sentences_file_generated), "a+") as f:
                     f.writelines(f"{sentence}|{category}\n")
 
         self.status = "3 - frasi generate"
@@ -426,7 +427,7 @@ class BotAI:
 
     def prepare_data_crf(self) -> bool:
 
-        with open(self.sentences_file_generated, encoding="utf-8") as f:
+        with open(os.path.join(self.data_path,self.sentences_file_generated), encoding="utf-8") as f:
             sentences = f.read()
             sentences = sentences.split("\n")
 
@@ -717,7 +718,7 @@ class BotAI:
 
         """Addestramento algoritmo di classificazione intents"""
 
-        df = pd.read_csv(self.sentences_file_generated, sep="|", header=None)
+        df = pd.read_csv(os.path.join(self.data_path,self.sentences_file_generated), sep="|", header=None)
 
         df.columns = ["sentences", "intents"]
 
