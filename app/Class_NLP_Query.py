@@ -36,7 +36,7 @@ from pprint import pprint
 
 import spacy
 
-nlp = spacy.load("it_core_news_sm")
+nlp = spacy.load("it_core_news_lg")
 
 
 # In[3]:
