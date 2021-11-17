@@ -1,0 +1,9 @@
+Ci sono fattorie didattiche ad [SEDE](Eboli)?|user_AskCity
+Quante fattorie didattiche ci sono a [SEDE](Salerno)?|user_AskCity
+Quante fattorie didattiche ci sono in provincia di [PROVINCIA](Salerno)?|user_AskProv
+Ci sono fattorie didattiche in provincia di [PROVINCIA](Salerno)?|user_AskProv
+Ci sono fattorie didattiche nella provincia di [PROVINCIA](Napoli)?|user_AskProv
+Quante fattorie didattiche ci sono in provincia di [PROVINCIA](Salerno) con [categoria](allevamento)?|user_AskProvWithParams
+Ci sono fattorie didattiche in provincia di [PROVINCIA](Salerno) con produzione di [CATEGORIA](formaggi)?|user_AskProvWithParams
+Ci sono fattorie didattiche nella provincia di [PROVINCIA](Napoli) che producono [CATEGORIA](formaggi)?|user_AskProvWithParams
+Ci sono fattorie didattiche nella provincia di [PROVINCIA](Napoli) con coltivazione di [CATEGORIA](frutta)?|user_AskProvWithParams
