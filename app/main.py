@@ -1,9 +1,9 @@
-#!/usr/bin/env python
+#!.venv/bin/python
 # coding: utf-8
 
 # import Class_NLP_Query
-from Class_NLP_Query import BotAI
 
+from PBG_Bot import BotAI
 
 botAI = BotAI(db_file="data/db_esempio.csv")
 
