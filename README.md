@@ -20,6 +20,12 @@ docker pull rasa/duckling
 docker run --rm -p 8000:8000 rasa/duckling
 ```
 
+## Set del Token Telegram
+
+```
+export PBG_BOT='TOKEN'
+```
+
 ## Avvio del Bot
 
 Il bot è stato concepito per essere compatibile con qualsiasi framework.
